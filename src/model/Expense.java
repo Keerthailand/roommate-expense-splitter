@@ -19,7 +19,7 @@ public abstract class Expense implements Splittable {
 
     }
 
-    public String getDescriptiom(){
+    public String getDescription(){
         return description;
 
     }
