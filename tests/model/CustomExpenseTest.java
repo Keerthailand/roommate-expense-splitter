@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class CustomExpenseTest {
 
-    @Test
+    @Test//Each person owes exactly the amount they were given.
     public void eachPersonOwesTheirAmount() {
         Person alex = new Person("Alex");
         Person sam = new Person("Sam");
@@ -22,7 +22,7 @@ public class CustomExpenseTest {
         assertEquals(1000, e.getShare(sam));
     }
 
-    @Test
+    @Test//An outsider owes $0 and isn’t involved.
     public void outsiderOwesNothing() {
         Person alex = new Person("Alex");
         HashMap<Person, Long> shares = new HashMap<>();
@@ -32,7 +32,7 @@ public class CustomExpenseTest {
         assertFalse(e.involves(new Person("Jordan")));
     }
 
-    @Test
+    @Test//getSharesTotal adds up everyone’s shares.
     public void sharesTotalAddsEveryone() {
         HashMap<Person, Long> shares = new HashMap<>();
         shares.put(new Person("A"), 1234L);
@@ -41,7 +41,7 @@ public class CustomExpenseTest {
         assertEquals(2000, e.getSharesTotal());
     }
 
-    @Test
+    @Test//Name matching ignores capital letters (“alex” finds Alex).
     public void namesMatchIgnoringCase() {
         HashMap<Person, Long> shares = new HashMap<>();
         shares.put(new Person("Alex"), 700L);

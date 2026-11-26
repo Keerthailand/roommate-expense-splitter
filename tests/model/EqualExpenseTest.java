@@ -13,7 +13,7 @@ public class EqualExpenseTest {
         return list;
     }
 
-    @Test
+    @Test//Even split: $60 between 2 people gives $30 each.
     public void splitsEvenAmountEqually() {
         ArrayList<Person> group = people("Alex", "Sam");
         EqualExpense e = new EqualExpense("Wi-Fi", 6000, group.get(0), group);
@@ -21,7 +21,7 @@ public class EqualExpenseTest {
         assertEquals(3000, e.getShare(group.get(1)));
     }
 
-    @Test
+    @Test//Leftover cents: $10 split 3 ways gives the extra cent to the first person.
     public void leftoverCentsGoToFirstPeople() {
         ArrayList<Person> group = people("Alex", "Sam", "Jordan");
         EqualExpense e = new EqualExpense("Pizza", 1000, group.get(0), group);
@@ -30,7 +30,7 @@ public class EqualExpenseTest {
         assertEquals(333, e.getShare(group.get(2)));
     }
 
-    @Test
+    @Test//Shares add up: an odd total split 7 ways still adds up exactly.
     public void sharesAddUpToTotal() {
         ArrayList<Person> group = people("A", "B", "C", "D", "E", "F", "G");
         EqualExpense e = new EqualExpense("Rent", 100003, group.get(0), group);
@@ -41,14 +41,14 @@ public class EqualExpenseTest {
         assertEquals(100003, sum);
     }
 
-    @Test
+    @Test//Outsider: someone not in the split owes $0.
     public void outsiderOwesNothing() {
         ArrayList<Person> group = people("Alex", "Sam");
         EqualExpense e = new EqualExpense("Wi-Fi", 6000, group.get(0), group);
         assertEquals(0, e.getShare(new Person("Jordan")));
     }
 
-    @Test
+    @Test//Payer left out: the payer owes $0 but still counts as “involved.”
     public void payerCanBeLeftOutOfSplit() {
         Person alex = new Person("Alex");
         ArrayList<Person> group = people("Sam", "Jordan");
